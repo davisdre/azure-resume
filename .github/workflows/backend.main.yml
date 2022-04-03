@@ -27,7 +27,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
-        
+
     - name: 'Resolve Project Dependencies Using Dotnet'
       shell: pwsh
       run: |
@@ -36,7 +36,7 @@ jobs:
         popd
     - name: 'Run unit test'
       shell: pwsh
-      Run: |
+      run: |
         pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/tests'
         dotnet test
     - name: 'Run Azure Functions Action'
