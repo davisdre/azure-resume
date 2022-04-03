@@ -30,7 +30,8 @@ My own Azure resume, following [ACG project video](https://learn.acloud.guru/ser
 - Added my custom domain to CORS policy for Azure Function.
 
 ## Fourth Steps
-
+- Setup CI/CD.
+- Created GitHub workflows for backend and frontend to be trigger on push oin those respective folders. 
 
 ## Improvements
 - Enable Azure KeyVault.
