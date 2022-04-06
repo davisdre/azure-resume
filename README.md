@@ -33,5 +33,8 @@ My own Azure resume, following [ACG project video](https://learn.acloud.guru/ser
 - Setup CI/CD.
 - Created GitHub workflows for backend and frontend to be trigger on push oin those respective folders. 
 
-## Improvements
-- Enable Azure KeyVault.
+## Azure Technologies being used
+- Azure CosmosDB
+- Azure Functions
+- Azure Storage
+- Azure CDN
