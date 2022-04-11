@@ -712,7 +712,7 @@
               slider.animating = false;
               slider.currentSlide = slider.animatingTo;
             }
-            slider.container.unbind("webkitTransitionEnd transitionend");
+            slider.container.off("webkitTransitionEnd transitionend");
             slider.container.bind("webkitTransitionEnd transitionend", function() {
               slider.wrapup(dimension);
             });
