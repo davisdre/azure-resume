@@ -94,7 +94,7 @@
 
         // KEYBOARD:
         if (slider.vars.keyboard && ($(slider.containerSelector).length === 1 || slider.vars.multipleKeyboard)) {
-          $(document).bind('keyup', function(event) {
+          $(document).on('keyup', function(event) {
             var keycode = event.keyCode;
             if (!slider.animating && (keycode === 39 || keycode === 37)) {
               var target = (keycode === 39) ? slider.getTarget('next') :
@@ -105,7 +105,7 @@
         }
         // MOUSEWHEEL:
         if (slider.vars.mousewheel) {
-          slider.bind('mousewheel', function(event, delta, deltaX, deltaY) {
+          slider.on('mousewheel', function(event, delta, deltaX, deltaY) {
             event.preventDefault();
             var target = (delta < 0) ? slider.getTarget('next') : slider.getTarget('prev');
             slider.flexAnimate(target, slider.vars.pauseOnAction);
@@ -141,7 +141,7 @@
         if (touch && slider.vars.touch) methods.touch();
 
         // FADE&&SMOOTHHEIGHT || SLIDE:
-        if (!fade || (fade && slider.vars.smoothHeight)) $(window).bind("resize orientationchange focus", methods.resize);
+        if (!fade || (fade && slider.vars.smoothHeight)) $(window).on("resize orientationchange focus", methods.resize);
 
         slider.find("img").attr("draggable", "false");
 
@@ -253,7 +253,7 @@
           slider.controlNav = slider.manualControls;
           methods.controlNav.active();
 
-          slider.controlNav.bind(eventType, function(event) {
+          slider.controlNav.on(eventType, function(event) {
             event.preventDefault();
 
             if (watchedEvent === "" || watchedEvent === event.type) {
@@ -307,7 +307,7 @@
 
           methods.directionNav.update();
 
-          slider.directionNav.bind(eventType, function(event) {
+          slider.directionNav.on(eventType, function(event) {
             event.preventDefault();
             var target;
 
@@ -355,7 +355,7 @@
 
           methods.pausePlay.update((slider.vars.slideshow) ? namespace + 'pause' : namespace + 'play');
 
-          slider.pausePlay.bind(eventType, function(event) {
+          slider.pausePlay.on(eventType, function(event) {
             event.preventDefault();
 
             if (watchedEvent === "" || watchedEvent === event.type) {
@@ -712,8 +712,8 @@
               slider.animating = false;
               slider.currentSlide = slider.animatingTo;
             }
-            slider.container.unbind("webkitTransitionEnd transitionend");
-            slider.container.bind("webkitTransitionEnd transitionend", function() {
+            slider.container.off("webkitTransitionEnd transitionend");
+            slider.container.on("webkitTransitionEnd transitionend", function() {
               slider.wrapup(dimension);
             });
           } else {
@@ -993,14 +993,14 @@
       slider.vars.added(slider);
     }
     slider.removeSlide = function(obj) {
-      var pos = (isNaN(obj)) ? slider.slides.index($(obj)) : obj;
+      var pos = (Number.isNaN(obj)) ? slider.slides.index($(obj)) : obj;
 
       // update count
       slider.count -= 1;
       slider.last = slider.count - 1;
 
       // remove slide
-      if (isNaN(obj)) {
+      if (Number.isNaN(obj)) {
         $(obj, slider.slides).remove();
       } else {
         (vertical && reverse) ? slider.slides.eq(slider.last).remove() : slider.slides.eq(obj).remove();
