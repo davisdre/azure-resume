@@ -1,30 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "H:\\Projects\\azure-resume\\backend\\tests\\tests.csproj": {}
+    "/workspaces/azure-resume/backend/tests/tests.csproj": {}
   },
   "projects": {
-    "H:\\Projects\\azure-resume\\backend\\api\\api.csproj": {
+    "/workspaces/azure-resume/backend/api/api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "H:\\Projects\\azure-resume\\backend\\api\\api.csproj",
+        "projectUniqueName": "/workspaces/azure-resume/backend/api/api.csproj",
         "projectName": "api",
-        "projectPath": "H:\\Projects\\azure-resume\\backend\\api\\api.csproj",
-        "packagesPath": "C:\\Users\\davis\\.nuget\\packages\\",
-        "outputPath": "H:\\Projects\\azure-resume\\backend\\api\\obj\\",
+        "projectPath": "/workspaces/azure-resume/backend/api/api.csproj",
+        "packagesPath": "/home/vscode/.nuget/packages/",
+        "outputPath": "/workspaces/azure-resume/backend/api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\davis\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/vscode/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net7.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {}
           }
         },
@@ -35,16 +35,16 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "Microsoft.Azure.WebJobs.Extensions.CosmosDB": {
               "target": "Package",
-              "version": "[3.0.10, )"
+              "version": "[4.3.0, )"
             },
             "Microsoft.NET.Sdk.Functions": {
               "target": "Package",
-              "version": "[4.0.1, )"
+              "version": "[4.2.0, )"
             }
           },
           "imports": [
@@ -53,7 +53,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -62,34 +63,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.401/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "H:\\Projects\\azure-resume\\backend\\tests\\tests.csproj": {
+    "/workspaces/azure-resume/backend/tests/tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "H:\\Projects\\azure-resume\\backend\\tests\\tests.csproj",
+        "projectUniqueName": "/workspaces/azure-resume/backend/tests/tests.csproj",
         "projectName": "tests",
-        "projectPath": "H:\\Projects\\azure-resume\\backend\\tests\\tests.csproj",
-        "packagesPath": "C:\\Users\\davis\\.nuget\\packages\\",
-        "outputPath": "H:\\Projects\\azure-resume\\backend\\tests\\obj\\",
+        "projectPath": "/workspaces/azure-resume/backend/tests/tests.csproj",
+        "packagesPath": "/home/vscode/.nuget/packages/",
+        "outputPath": "/workspaces/azure-resume/backend/tests/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\davis\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/vscode/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net7.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {
-              "H:\\Projects\\azure-resume\\backend\\api\\api.csproj": {
-                "projectPath": "H:\\Projects\\azure-resume\\backend\\api\\api.csproj"
+              "/workspaces/azure-resume/backend/api/api.csproj": {
+                "projectPath": "/workspaces/azure-resume/backend/api/api.csproj"
               }
             }
           }
@@ -101,8 +102,8 @@
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "Microsoft.AspNetCore.Mvc": {
               "target": "Package",
@@ -135,7 +136,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -144,7 +146,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.401/RuntimeIdentifierGraph.json"
         }
       }
     }
