@@ -71,7 +71,7 @@
 			"type": "func",
 			"dependsOn": "build (functions)",
 			"options": {
-				"cwd": "${workspaceFolder}/backend\\api/bin/Debug/net6.0"
+				"cwd": "${workspaceFolder}/backend\\api/bin/Debug/net7.0"
 			},
 			"command": "host start",
 			"isBackground": true,
