@@ -1,385 +1,48 @@
 <!DOCTYPE html>
-<!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<html lang="en">
 <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>My cloud Resume</title>
+   <style>
+      /* Add your CSS styles here */
+      body {
+         font-family: Arial, Helvetica, sans-serif;
+      }
+      /* Add more styles as need */
 
-   <!--- Basic Page Needs
-   ================================================= -->
-   <meta charset="utf-8">
-	<title>Drew's Resume</title>
-	<meta name="description" content="">
-	<meta name="author" content="">
-
-   <!-- Mobile Specific Metas
-   ================================================== -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-	<!-- CSS
-    ================================================== -->
-   <link rel="stylesheet" href="css/default.css">
-	<link rel="stylesheet" href="css/layout.css">
-   <link rel="stylesheet" href="css/media-queries.css">
-   <link rel="stylesheet" href="css/magnific-popup.css">
-
-   <!-- Script
-   ================================================== -->
-   <script src="js/modernizr.js"></script>
-   <script src="main.js"></script>
-
-   <!-- Favicons
-	================================================== -->
-	<link rel="shortcut icon" href="favicon.png" >
-
+   </style>
 </head>
-
 <body>
+   <!--HEADER-->
+   <header>
+      <h1>Welcome to My Cloud Resume</h1>
+   </header>
+   
+   <!--NAV BAR-->
+   <nav>
+      <ul>
+         <li><a href="#about">About Me</a></li>
+         <li><a href="#resume">Resume</a></li>
+      </ul>
+   </nav>
 
-   <!-- Header
-   ================================================== -->
-   <header id="home">
-
-      <nav id="nav-wrap">
-
-         <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show navigation</a>
-	      <a class="mobile-btn" href="#" title="Hide navigation">Hide navigation</a>
-
-         <ul id="nav" class="nav">
-            <li class="current"><a class="smoothscroll" href="#home">Home</a></li>
-            <li><a class="smoothscroll" href="#about">About</a></li>
-	         <li><a class="smoothscroll" href="#resume">Resume</a></li>
-            <li><a href="https://blog.davisdre.me/">Blog</a></li>
-         </ul> <!-- end #nav -->
-
-      </nav> <!-- end #nav-wrap -->
-
-      <div class="row banner">
-         <div class="banner-text">
-            <h1 class="responsive-headline">Hi, I'm Drew</h1>
-            
-            <p>and this page has been viewed <a id="counter"></a> times :) </p> 
-            <ul class="social">
-               <li><a href="https://blog.davisdre.me"><i class="fa fa-external-link"></i></a></li>
-               <li><a href="https://www.linkedin.com/in/davisdrew/"><i class="fa fa-linkedin"></i></a></li>
-               <li><a href="https://github.com/davisdre/"><i class="fa fa-github"></i></a></li>
-            </ul>
-         </div>
-      </div>
-
-      <p class="scrolldown">
-         <a class="smoothscroll" href="#about"><i class="icon-down-circle"></i></a>
-      </p>
-
-   </header> <!-- Header End -->
-
-
-   <!-- About Section
-   ================================================== -->
+   <!--ABOUT SECTION-->
    <section id="about">
+      <h2>About me</h2>
+      <p>This is the about section. Add details about yourself here.</p>
+   </section>
 
-      <div class="row">
-
-         <div class="three columns">
-
-            <img class="profile-pic"  src="images/me.png" alt="" />
-
-         </div>
-
-         <div class="nine columns main-col">
-
-            <h2>ABOUT ME</h2>
-
-            <p> Hi, I'm Drew Davis, <span>Cloud Admnistrator at <a href="https://www.in.gov/iot">Indiana Office of Technology</a></span> 
-               and <span><a href="https://blog.davisdre.me/">Cloud Enthusiats</a></span> focused on making cloud learning more accessible and less daunting for everyone. 
-               
-         </br>
-      </br>
-       I built this page as part of the <span><a href="https://github.com/davisdre/azure-resume">Cloud Guru Azure Resume Challenge.</a></span>
-            
-
-         </div> <!-- end .main-col -->
-
-      </div>
-
-   </section> <!-- About Section End-->
-
-
-   <!-- Resume Section
-   ================================================== -->
+   <!--RESUME SECTION-->
    <section id="resume">
+      <h2>This is the resume section. Add details about your resume here.</h2>
+   </section>
 
-      <!-- Education
-      ----------------------------------------------- -->
-      <div class="row education">
-
-         <div class="three columns header-col">
-            <h1><span>Certifications</span></h1>
-         </div>
-
-         <div class="nine columns main-col">
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>Microsoft: Azure Fundamentals</h3>
-                  <p class="info"><a href="https://www.credly.com/badges/8687ade1-bd1c-4301-bd7e-d7e32bc1207e/public_url">View my verified achievement.</a> <span>&bull;</span> <em class="date">April 2022</em></p>
-                  <img src="images/microsoft-certified-azure-fundamentals.png" alt="Microsoft Azure Fundamentals Badge image">
-
-               </div>
-
-            </div>
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>AWS Certified Cloud Practitioner</h3>
-                  <p class="info"><a href="https://www.credly.com/badges/730666a3-fa55-4aab-ae2c-a84f62aa84a9/public_url">View my verified achievement.</a> <span>&bull;</span> <em class="date">July 2022</em></p>
-                  <img src="images/aws-certified-cloud-practitioner.png" alt="AWS Certified Cloud Practitioner Badge image">
-
-               </div>
-
-            </div>
-
-         </div> <!-- main-col end -->
-
-      </div> <!-- End Education -->
-
-
-      <!-- Work
-      ----------------------------------------------- -->
-      <div class="row work">
-
-         <div class="three columns header-col">
-            <h1><span>Work</span></h1>
-         </div>
-
-         <div class="nine columns main-col">
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>Indiana Office of Technology</h3>
-                  <p class="info">Cloud Administrator Senior <span>&bull;</span> <em class="date">February 2022 - Present</em></p>
-
-                  <p>
-                  <li>Configure, maintain, and support Microsoft Azure cloud environment and other cloud computing environments as decided by the business.</li> 
-                  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>Indiana Office of Technology</h3>
-                  <p class="info">Senior System Administrator <span>&bull;</span> <em class="date">February 2017 - February 2022</em></p>
-
-                  <p>
-                     <li>Technical lead for migrating State of Indiana environment to Microsoft BitLocker using Intune policy and Azure hybrid-joined device records.</li>
-                     <li>Develop fundament knowledge of Azure and Intune administration.</li>
-                     <li>Provided Tier III support to 1000+ end users remotely to troubleshoot, resolve, and provide in-depth and quality technical support.</li>
-                  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>Indiana Office of Technology</h3>
-                  <p class="info">LAN Administrator Intermediate <span>&bull;</span> <em class="date">November 2013 - February 2017</em></p>
-
-                  <p>
-                  <li>Installs network software/hardware.</li>
-                  <li>Acted as a liaison for other departments/division in providing troubleshooting for all types of programs.</li>
-                  <li>Provided integrated customer support to all users on system design and implementation.</li>
-                  <li>Perform other duties as assigned.</li>
-                  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>TEKsystems</h3>
-                  <p class="info">LAN Technican <span>&bull;</span> <em class="date">November 2012 - November 2013</em></p>
-
-                  <p>
-                  <li>Lead/participate in Hardware & Software deployments.</li>
-                  <li>Responsible for all work in progress assigned to ensure completion of tasks and proper communications with clients.</li>
-                  <li>Provided expertise on support services when requested by peers and clients.</li>
-                  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>S&R Resources, Inc.</h3>
-                  <p class="info">Migration Specialist <span>&bull;</span> <em class="date">August 2012 - November 2012</em></p>
-
-                  <p>
-                  <li>Provide first and second-level support for the upgrade to Windows 7.</li>
-                  <li>Participate in device collection, configuration, and upgrade of client endpoint devices.</li>
-                  <li>Ensure all steps for a successful upgrade of multiple laptops and desktops on a daily basis.</li>                  
-                  <li>Work with each client to ensure checklist items are completed and that the laptops and desktops are issue-free.</li>
-                  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>United States Navy</h3>
-                  <p class="info">Information Systems Technican (Enlisted) <span>&bull;</span> <em class="date">August 2012 - November 2012</em></p>
-
-                  <p>
-                  <li>Established, monitored and maintained radio frequency communication systems.</li>
-                  <li>Transmitted, received, and stored all incoming and outgoing messages.</li>
-                  <li>Designed, installed and operated wide-area-networks, computer systems and associated devices.</li>                  
-                  <li>Installed applications, troubleshooted user problems and provided training and assistance with use of computer hardware and software.</li>
-                  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-         </div> <!-- main-col end -->
-
-      </div> <!-- End Work -->
-
-      <!-- Cloud Projects
-      ----------------------------------------------- -->
-      <div class="row cloud projects">
-
-         <div class="three columns header-col">
-            <h1><span>Cloud Projects</span></h1>
-         </div>
-
-         <div class="nine columns main-col">
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>Azure Resume Challenge</h3>
-                  <p class="info"> <a href="https://github.com/davisdre/azure-resume">Github</a> <span>&bull;</span> <a href="https://www.davisdre.me/">Site</a> <span>&bull;</span> <em class="date">April 2022</em></p>
-
-                  <p>The Azure Resume Challenge by A Cloud Guru was a cloud challenge that I saw while studying for my AZ-900. The project looked like a great thing to accomplish to wrap up with everything I learned.</p>
-
-                  <p>
-                  <li>The frontend is a provided template that has been modified that holds the HTML and CSS.</li>
-                  <li>The backend is a serverless API using Azure Functions to do a HTTP trigger.</li>
-                  <li>The 'visitor' counter is utilizing Azure CosmosDB to keep track of the count.</li>
-                  <li>Azure Blob Storage is storing the frontend. Azure CDN is also being utilized for static content delivery.</li>
-                  <li>CI/CD setup via Github actions with triggers being set on the 'frontend' and 'backend' folders.</li>
-                  </p>
-
-               </div>
-
-            </div> <!-- item end --> 
-            
-            <div class="row item">
-            
-               <div class="twelve columns">
-
-                  <h3>My Blog</h3>
-                  <p class="info"> <a href="https://github.com/davisdre/azure-blog">Github</a> <span>&bull;</span> <a href="https://blog.davisdre.me/">Site</a> <span>&bull;</span> <em class="date">April 2022</em></p>
-
-                  <p>I needed to create something where I can share what I'm learning to others, so I decided to create a blog. I choose to go with using Jekyll with Azure services.</p>
-
-                  <p>
-                  <li>I learned about Static Site Generator, Jekyll.</li>
-                  <li>Running via Azure Static Web App and utilizes custom domain.</li>
-                  <li>Setup conducted via Azure CLI and conducted within Microsoft Windows Subsystem Linux (Ubuntu) on Windows 1l workstation.</li>
-                  <li>CI/CD setup via Github actions.</li>
-                  </p>
-
-               </div>
-
-            </div> <!-- item end -->
-
-            <div class="row item">
-
-               <div class="twelve columns">
-
-                  <h3>Connect with me</h3>
-                  <p class="info"> <a href="https://github.com/davisdre/connect-davisdre-me">Github</a> <span>&bull;</span> <a href="https://connect.davisdre.me/">Site</a> <span>&bull;</span> <em class="date">Jan 2022</em></p>
-
-                  <p>When networking with others I wanted a easy way how others could connect with me on the platforms that I use.</p>
-
-                  <p>
-                     <li>Provided template that has been modified the HTML and CSS.</li>
-                     <li>AWS S3 is storing HTML and CSS. AWS CloudFront is also being utilized for static content delivery.</li>
-                  </p>
-               </div>
-            </div>
- 
-         </div> <!-- main-col end -->
-
-      </div> <!-- End Work -->
-
-
-      
-
-   </section> <!-- Resume Section End-->
-
-
-   <!-- footer
-   ================================================== -->
+   <!--FOOTER-->
    <footer>
+      <p>&copy; 2023 Drew Davis. All rights reserverd.</p>
+   </footer>
 
-      <div class="row">
-
-         <div class="twelve columns">
-
-            <ul class="social-links">
-               <li><a href="https://www.linkedin.com/in/davisdrew/"><i class="fa fa-linkedin"></i></a></li>
-               <li><a href="https://blog.davisdre.me"><i class="fa fa-external-link"></i></a></li>
-               <li><a href="https://github.com/davisdre/"><i class="fa fa-github"></i></a></li>
-            </ul>
-
-            <ul class="copyright">
-               <a href="https://www.styleshout.com/free-templates/ceevee/"> Template by CeeVee </a>
-                
-            </ul>
-
-         </div>
-
-         <div id="go-top"><a class="smoothscroll" title="Back to Top" href="#home"><i class="icon-up-open"></i></a></div>
-
-      </div>
-
-   </footer> <!-- Footer End-->
-
-   <!-- Java Script
-   ================================================== -->
-   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-   <script>window.jQuery || document.write('<script src="js/jquery-1.10.2.min.js"><\/script>')</script>
-   <script type="text/javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
-
-   <script src="js/jquery.flexslider.js"></script>
-   <script src="js/waypoints.js"></script>
-   <script src="js/jquery.fittext.js"></script>
-   <script src="js/magnific-popup.js"></script>
-   <script src="js/init.js"></script>
 
 </body>
-
 </html>
