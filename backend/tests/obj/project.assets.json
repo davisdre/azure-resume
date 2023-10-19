@@ -726,7 +726,7 @@
           "lib/netstandard2.0/Microsoft.AspNetCore.WebUtilities.dll": {}
         }
       },
-      "Microsoft.Azure.Cosmos/3.33.0": {
+      "Microsoft.Azure.Cosmos/3.35.4": {
         "type": "package",
         "dependencies": {
           "Azure.Core": "1.19.0",
@@ -753,13 +753,6 @@
           "lib/netstandard2.0/Microsoft.Azure.Cosmos.Core.dll": {},
           "lib/netstandard2.0/Microsoft.Azure.Cosmos.Direct.dll": {},
           "lib/netstandard2.0/Microsoft.Azure.Cosmos.Serialization.HybridRow.dll": {}
-        },
-        "contentFiles": {
-          "contentFiles/any/any/_._": {
-            "buildAction": "None",
-            "codeLanguage": "any",
-            "copyToOutput": false
-          }
         },
         "build": {
           "build/netstandard2.0/_._": {}
@@ -790,10 +783,10 @@
       "Microsoft.Azure.Functions.Analyzers/1.0.0": {
         "type": "package"
       },
-      "Microsoft.Azure.WebJobs/3.0.36": {
+      "Microsoft.Azure.WebJobs/3.0.37": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Azure.WebJobs.Core": "3.0.36",
+          "Microsoft.Azure.WebJobs.Core": "3.0.37",
           "Microsoft.Extensions.Configuration": "2.1.1",
           "Microsoft.Extensions.Configuration.Abstractions": "2.1.1",
           "Microsoft.Extensions.Configuration.EnvironmentVariables": "2.1.0",
@@ -813,7 +806,7 @@
           "lib/netstandard2.0/Microsoft.Azure.WebJobs.Host.dll": {}
         }
       },
-      "Microsoft.Azure.WebJobs.Core/3.0.36": {
+      "Microsoft.Azure.WebJobs.Core/3.0.37": {
         "type": "package",
         "dependencies": {
           "System.ComponentModel.Annotations": "4.4.0",
@@ -841,11 +834,11 @@
           "lib/netstandard2.0/Microsoft.Azure.WebJobs.Extensions.dll": {}
         }
       },
-      "Microsoft.Azure.WebJobs.Extensions.CosmosDB/4.3.0": {
+      "Microsoft.Azure.WebJobs.Extensions.CosmosDB/4.4.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Azure.Cosmos": "3.33.0",
-          "Microsoft.Azure.WebJobs": "3.0.36",
+          "Microsoft.Azure.Cosmos": "3.35.4",
+          "Microsoft.Azure.WebJobs": "3.0.37",
           "Microsoft.CSharp": "4.5.0",
           "Microsoft.Extensions.Azure": "1.1.0"
         },
@@ -1178,19 +1171,27 @@
           "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0"
         },
         "compile": {
-          "lib/netcoreapp2.0/Microsoft.Extensions.DependencyInjection.dll": {}
+          "lib/netcoreapp2.0/Microsoft.Extensions.DependencyInjection.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netcoreapp2.0/Microsoft.Extensions.DependencyInjection.dll": {}
+          "lib/netcoreapp2.0/Microsoft.Extensions.DependencyInjection.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions/2.2.0": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
+          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
+          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.DependencyModel/2.1.0": {
@@ -1215,10 +1216,14 @@
           "Microsoft.Extensions.Primitives": "2.2.0"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {}
+          "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {}
+          "lib/netstandard2.0/Microsoft.Extensions.FileProviders.Abstractions.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.FileProviders.Composite/2.2.0": {
@@ -1366,10 +1371,14 @@
       "Microsoft.Extensions.ObjectPool/2.2.0": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.ObjectPool.dll": {}
+          "lib/netstandard2.0/Microsoft.Extensions.ObjectPool.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.ObjectPool.dll": {}
+          "lib/netstandard2.0/Microsoft.Extensions.ObjectPool.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.Options/2.2.0": {
@@ -1380,10 +1389,14 @@
           "System.ComponentModel.Annotations": "4.5.0"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.Options.dll": {}
+          "lib/netstandard2.0/Microsoft.Extensions.Options.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.Options.dll": {}
+          "lib/netstandard2.0/Microsoft.Extensions.Options.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.Options.ConfigurationExtensions/2.1.0": {
@@ -1408,10 +1421,14 @@
           "System.Runtime.CompilerServices.Unsafe": "4.5.1"
         },
         "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.Primitives.dll": {}
+          "lib/netstandard2.0/Microsoft.Extensions.Primitives.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.Primitives.dll": {}
+          "lib/netstandard2.0/Microsoft.Extensions.Primitives.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.WebEncoders/2.2.0": {
@@ -3644,7 +3661,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
-          "Microsoft.Azure.WebJobs.Extensions.CosmosDB": "4.3.0",
+          "Microsoft.Azure.WebJobs.Extensions.CosmosDB": "4.4.0",
           "Microsoft.NET.Sdk.Functions": "4.2.0"
         },
         "compile": {
@@ -4318,22 +4335,22 @@
         "microsoft.aspnetcore.webutilities.nuspec"
       ]
     },
-    "Microsoft.Azure.Cosmos/3.33.0": {
-      "sha512": "RbEI95ROs4WljcutiG91OBUzYYAKRwkOjAINUkwSw8guZ1P4uyDGB3wPCuYf2DGlacPFhFXftTBbpLUUu9qwGg==",
+    "Microsoft.Azure.Cosmos/3.35.4": {
+      "sha512": "oDwaE4TlQHec3R8CH5xLgvci5Fpj4q/W1kSPu3gm2Q49cJXXyEQqGp/j3dgM7O/fwrm9u5ZgvYtkpor2f4i2wQ==",
       "type": "package",
-      "path": "microsoft.azure.cosmos/3.33.0",
+      "path": "microsoft.azure.cosmos/3.35.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon.png",
+        "LICENSE",
+        "ThirdPartyNotice.txt",
         "build/netstandard2.0/Microsoft.Azure.Cosmos.targets",
-        "content/ThirdPartyNotice.txt",
-        "contentFiles/any/netstandard2.0/ThirdPartyNotice.txt",
         "lib/netstandard2.0/Microsoft.Azure.Cosmos.Client.dll",
         "lib/netstandard2.0/Microsoft.Azure.Cosmos.Core.dll",
         "lib/netstandard2.0/Microsoft.Azure.Cosmos.Direct.dll",
         "lib/netstandard2.0/Microsoft.Azure.Cosmos.Serialization.HybridRow.dll",
-        "microsoft.azure.cosmos.3.33.0.nupkg.sha512",
+        "microsoft.azure.cosmos.3.35.4.nupkg.sha512",
         "microsoft.azure.cosmos.nuspec",
         "runtimes/win-x64/native/Cosmos.CRTCompat.dll",
         "runtimes/win-x64/native/Microsoft.Azure.Cosmos.ServiceInterop.dll",
@@ -4358,28 +4375,28 @@
         "tools/uninstall.ps1"
       ]
     },
-    "Microsoft.Azure.WebJobs/3.0.36": {
-      "sha512": "S5wppmL8sUfanGmo/zDzpoWrcM+IOvGNFjpkD5XJFCFzrBqktZTEX6MpP/vF3RN6VZm2sFKegZYyce+RNhgE4Q==",
+    "Microsoft.Azure.WebJobs/3.0.37": {
+      "sha512": "cB8ExO360UeFprY4GAuumLhg35krY56LriAAE8kNkckxFQlEIZwQ5lMsOFU0cRwUcvFajLMdALllKF2PgYJRkA==",
       "type": "package",
-      "path": "microsoft.azure.webjobs/3.0.36",
+      "path": "microsoft.azure.webjobs/3.0.37",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.Azure.WebJobs.Host.dll",
-        "microsoft.azure.webjobs.3.0.36.nupkg.sha512",
+        "microsoft.azure.webjobs.3.0.37.nupkg.sha512",
         "microsoft.azure.webjobs.nuspec",
         "webjobs.png"
       ]
     },
-    "Microsoft.Azure.WebJobs.Core/3.0.36": {
-      "sha512": "4ht/u677qxDL5rviXafYI5K9qtxee8peXQd8JDqG5KBRr5VXct2pgpEs5SnNu+gDO8dAVp+83N1IRiGG2Fl7Nw==",
+    "Microsoft.Azure.WebJobs.Core/3.0.37": {
+      "sha512": "nKlnoQyKmC5HsUIWLXu3a9VYhLKAAriZQ8v3PLldWKjV1vIQMiHKGK68FbLjRtvZsxCnIYS44gLlQjuOua//dg==",
       "type": "package",
-      "path": "microsoft.azure.webjobs.core/3.0.36",
+      "path": "microsoft.azure.webjobs.core/3.0.37",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.Azure.WebJobs.dll",
-        "microsoft.azure.webjobs.core.3.0.36.nupkg.sha512",
+        "microsoft.azure.webjobs.core.3.0.37.nupkg.sha512",
         "microsoft.azure.webjobs.core.nuspec",
         "webjobs.png"
       ]
@@ -4396,16 +4413,16 @@
         "microsoft.azure.webjobs.extensions.nuspec"
       ]
     },
-    "Microsoft.Azure.WebJobs.Extensions.CosmosDB/4.3.0": {
-      "sha512": "nE5byGgJbwFDYhctQ9YHINWSWsiEidgyTdcMQK4zV6ZDOjepDXrarvE6Cf/XYgW8qLY0JVihL3u7D4avYTl4/w==",
+    "Microsoft.Azure.WebJobs.Extensions.CosmosDB/4.4.0": {
+      "sha512": "9QRXTCyLv8GgV+vRwZY1X3Yy4nQ7H8YumAntyc648bZ8dgZSSbraRH3KevbDfHSyDovfgAu6Zbr8YHfZRZScQA==",
       "type": "package",
-      "path": "microsoft.azure.webjobs.extensions.cosmosdb/4.3.0",
+      "path": "microsoft.azure.webjobs.extensions.cosmosdb/4.4.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.txt",
         "lib/netstandard2.0/Microsoft.Azure.WebJobs.Extensions.CosmosDB.dll",
-        "microsoft.azure.webjobs.extensions.cosmosdb.4.3.0.nupkg.sha512",
+        "microsoft.azure.webjobs.extensions.cosmosdb.4.4.0.nupkg.sha512",
         "microsoft.azure.webjobs.extensions.cosmosdb.nuspec",
         "webjobs.png"
       ]

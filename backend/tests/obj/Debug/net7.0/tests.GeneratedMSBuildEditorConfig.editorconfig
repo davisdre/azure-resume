@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = tests
-build_property.ProjectDir = c:\Users\davis\Dev\azure-resume\backend\tests\
+build_property.ProjectDir = /workspaces/azure-resume/backend/tests/
