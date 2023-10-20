@@ -1,12 +1,8 @@
 {
   "IsEncrypted": false,
   "Values": {
-    "AzureWebJobsStorage": "",
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=drewdavisresumestorage;AccountKey=nP9on2U0DrkAyRz8XuUvlTqe/v8Yo1Ys/A5WpSJNgzZk9y0J/i+2rZLdVzd1CU6SwAKnUtUCXuur+AStL6tMtw==;EndpointSuffix=core.windows.net",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet",
     "AzureResumeConnectionString": "AccountEndpoint=https://drewazureresume.documents.azure.com:443/;AccountKey=kOGAx2lq03xi8GwMZV9XDwOu8NhuqKkZ33QiXEZZBvLoAUzZl9Txa8PB6kOb9Ut8s4GJHPwN11SfxKCQGjY4dQ==;"
-  },
-  "Host":
-  {
-    "CORS": "*"
   }
 }

@@ -1,10 +1,6 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "GNlLeFoIAZLl13uPRgxWsQ8tRl8+Hu3Fp9ZjeTFdeIh5Lo0yBqiDaiMswJ9m4WXxs+RuM9g7cToDcu56dc4xWA==",
-=======
-  "dgSpecHash": "9oYV2HFvvuONb8uWBj6bDSxRmHJLww+w/cg/sg+WaKxNR6DyBwwNfvK2nplfzk+OsahnLM7hMoAhCPPkuVaw1g==",
->>>>>>> main
   "success": true,
   "projectFilePath": "/workspaces/azure-resume/backend/tests/tests.csproj",
   "expectedPackageFiles": [
@@ -227,5 +223,12 @@
     "/home/vscode/.nuget/packages/xunit.extensibility.execution/2.4.1/xunit.extensibility.execution.2.4.1.nupkg.sha512",
     "/home/vscode/.nuget/packages/xunit.runner.visualstudio/2.4.3/xunit.runner.visualstudio.2.4.3.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file /workspaces/azure-resume/backend/tests/obj/project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
