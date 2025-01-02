@@ -8,6 +8,9 @@ on:
         - 'frontend/**'
         - '.github/workflows/**'
 
+permissions:
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
