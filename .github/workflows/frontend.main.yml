@@ -35,7 +35,7 @@ jobs:
       uses: azure/CLI@v1
       with:
         inlineScript: |
-            az storage blob upload-batch --account-name ${{ steps.get-storage.outputs.storageAccountName }} --auth-mode login -d '$web' -s frontend/ --overwrite
+            az storage blob upload-batch --account-name ${{ steps.get-storage.outputs.storageAccountName }} --auth-mode key -d '$web' -s frontend/ --overwrite
 
   # Azure logout
     - name: logout
