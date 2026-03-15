@@ -113,7 +113,7 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
         }
         {
           name: 'FUNCTIONS_WORKER_RUNTIME'
-          value: 'dotnet-isolated' // .NET 8 support per your devcontainer and workflows
+          value: 'dotnet' // .NET in-process model
         }
         {
           name: 'AzureResumeConnectionString' // Connecting the DB
