@@ -11,6 +11,10 @@ on:
 permissions:
   id-token: write
 
+env:
+  AZURE_RESOURCE_GROUP: 'azresrg'          # Resource group containing the deployed infra
+  AZURE_DEPLOYMENT_NAME: 'azresrgdev2'     # Deployment name used for Bicep deployment
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,11 +26,16 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
+    - name: 'Get Storage Account name from deployment output'
+      id: get-storage
+      run: |
+        echo "storageAccountName=$(az deployment group show --resource-group $AZURE_RESOURCE_GROUP --name $AZURE_DEPLOYMENT_NAME --query properties.outputs.storageAccountName.value -o tsv)" >> $GITHUB_OUTPUT
+
     - name: Upload to blob storage
       uses: azure/CLI@v1
       with:
         inlineScript: |
-            az storage blob upload-batch --account-name drewdavisresume --auth-mode key -d '$web' -s frontend/ --overwrite
+            az storage blob upload-batch --account-name ${{ steps.get-storage.outputs.storageAccountName }} --auth-mode login -d '$web' -s frontend/ --overwrite
 
   # Azure logout
     - name: logout
