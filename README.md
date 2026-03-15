@@ -24,17 +24,17 @@ My own Azure resume, following [ACG project video](https://learn.acloud.guru/ser
 ## Third Steps
 - Deployed Frontend folder to Azure Blob Storage via Visual Studio Code Extension: Azure Storage.
 - Updated CORS setting on Azure function to reflect URL of Azure Blog Storage.
-- Create Azure CDN for our Azure Blob Storage.
-- Added custom domain to CDN, [www.davisdre.me](https://www.davisdre.me).
-- Enable HTTPS on the Azure CDN.
+- Create Cloudflare distribution for our Azure Blob Storage.
+- Added custom domain to Cloudflare, [www.davisdre.me](https://www.davisdre.me).
+- Enable HTTPS on Cloudflare.
 - Added my custom domain to CORS policy for Azure Function.
 
 ## Fourth Steps
 - Setup CI/CD.
 - Created GitHub workflows for backend and frontend to be trigger on push oin those respective folders. 
 
-## Azure Technologies being used
+## Technologies being used
 - Azure CosmosDB
 - Azure Functions
 - Azure Storage
-- Azure CDN
+- Cloudflare
