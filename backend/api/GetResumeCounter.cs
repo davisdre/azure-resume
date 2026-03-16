@@ -18,9 +18,14 @@ namespace Company.Function
         [Function("GetResumeCounter")]
         public MultiResponse Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req,
-            [CosmosDBInput(databaseName: "AzureResume", containerName: "Counter", Connection = "AzureResumeConnectionString", Id = "1", PartitionKey = "1")] Counter counter)
+            [CosmosDBInput(databaseName: "AzureResume", containerName: "Counter", Connection = "AzureResumeConnectionString", Id = "1", PartitionKey = "1")] Counter? counter)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
+
+            if (counter == null)
+            {
+                counter = new Counter { Id = "1", Count = 0 };
+            }
 
             counter.Count += 1;
 
@@ -41,8 +46,8 @@ namespace Company.Function
     public class MultiResponse
     {
         [CosmosDBOutput(databaseName: "AzureResume", containerName: "Counter", Connection = "AzureResumeConnectionString", CreateIfNotExists = false)]
-        public Counter Document { get; set; }
+        public required Counter Document { get; set; }
 
-        public HttpResponseData HttpResponse { get; set; }
+        public required HttpResponseData HttpResponse { get; set; }
     }
 }

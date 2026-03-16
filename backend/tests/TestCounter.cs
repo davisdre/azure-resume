@@ -14,9 +14,11 @@ namespace tests
         public void Http_trigger_should_return_known_string()
         {
             // Arrange
-            var counter = new Company.Function.Counter();
-            counter.Id = "1";
-            counter.Count = 2;
+            var counter = new Company.Function.Counter
+            {
+                Id = "1",
+                Count = 2
+            };
 
             var loggerFactory = new Mock<ILoggerFactory>();
             var logger = new Mock<ILogger<Company.Function.GetResumeCounter>>();
