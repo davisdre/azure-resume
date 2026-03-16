@@ -1,6 +1,6 @@
 using System.Net;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using System.Text.Json;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 
@@ -31,7 +31,7 @@ namespace Company.Function
 
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "application/json; charset=utf-8");
-            response.WriteString(JsonConvert.SerializeObject(counter));
+            response.WriteString(JsonSerializer.Serialize(counter));
 
             // Return both the HTTP response and the document to update CosmosDB
             return new MultiResponse
