@@ -90,6 +90,7 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
     httpsOnly: true
     siteConfig: {
       netFrameworkVersion: 'v8.0' // Explicitly set .NET 8
+      use32BitWorkerProcess: false // Run as a 64-bit process for .NET Isolated
       cors: {
         allowedOrigins: [
           '*' // In production, consider restricting this strictly to your CDN domain
