@@ -117,6 +117,10 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
           value: 'dotnet-isolated' // .NET 8 requires the isolated worker model
         }
         {
+          name: 'WEBSITE_RUN_FROM_PACKAGE'
+          value: '1' // Forces a clean deployment and ignores old ghost files
+        }
+        {
           name: 'AzureResumeConnectionString' // Connecting the DB
           value: cosmosDbAccount.listConnectionStrings().connectionStrings[0].connectionString
         }
