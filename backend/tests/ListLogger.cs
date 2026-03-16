@@ -21,8 +21,8 @@ namespace tests
         public void Log<TState>(LogLevel logLevel,
                                 EventId eventId,
                                 TState state,
-                                Exception exception,
-                                Func<TState, Exception, string> formatter)
+                                Exception? exception,
+                                Func<TState, Exception?, string> formatter)
         {
             string message = formatter(state, exception);
             this.Logs.Add(message);

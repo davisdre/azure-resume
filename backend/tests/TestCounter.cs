@@ -1,29 +1,45 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Xunit;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
 using System.Net;
-using System.Net.Http;
-using System.Text;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
+using Moq;
+using System.IO;
 
 namespace tests
 {
     public class TestCounter
     {
-        private readonly ILogger logger = TestFactory.CreateLogger();
-
         [Fact]
         public void Http_trigger_should_return_known_string()
         {
+            // Arrange
             var counter = new Company.Function.Counter();
             counter.Id = "1";
             counter.Count = 2;
-            var request = TestFactory.CreateHttpRequest();
-            var response = (HttpResponseMessage) Company.Function.GetResumeCounter.Run(request, counter, out counter, logger);
-            Assert.Equal(3, counter.Count);
+
+            var loggerFactory = new Mock<ILoggerFactory>();
+            var logger = new Mock<ILogger<Company.Function.GetResumeCounter>>();
+            loggerFactory.Setup(x => x.CreateLogger(It.IsAny<string>())).Returns(logger.Object);
+
+            var context = new Mock<FunctionContext>();
+            var request = new Mock<HttpRequestData>(context.Object);
+
+            var response = new Mock<HttpResponseData>(context.Object);
+            response.SetupProperty(r => r.Headers, new HttpHeadersCollection());
+            response.SetupProperty(r => r.StatusCode, HttpStatusCode.OK);
+            response.SetupProperty(r => r.Body, new MemoryStream());
+
+            request.Setup(r => r.CreateResponse()).Returns(response.Object);
+
+            var function = new Company.Function.GetResumeCounter(loggerFactory.Object);
+
+            // Act
+            var result = function.Run(request.Object, counter);
+
+            // Assert
+            Assert.Equal(3, result.Document.Count);
+            Assert.Equal(HttpStatusCode.OK, result.HttpResponse.StatusCode);
         }
 
     }
