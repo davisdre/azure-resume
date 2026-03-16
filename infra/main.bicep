@@ -89,6 +89,7 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
     serverFarmId: appServicePlan.id
     httpsOnly: true
     siteConfig: {
+      netFrameworkVersion: 'v8.0' // Explicitly set .NET 8
       cors: {
         allowedOrigins: [
           '*' // In production, consider restricting this strictly to your CDN domain
@@ -113,7 +114,7 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
         }
         {
           name: 'FUNCTIONS_WORKER_RUNTIME'
-          value: 'dotnet' // .NET in-process model
+          value: 'dotnet-isolated' // .NET 8 requires the isolated worker model
         }
         {
           name: 'AzureResumeConnectionString' // Connecting the DB
