@@ -7,12 +7,14 @@
 	"features": {
 		"ghcr.io/devcontainers/features/azure-cli:1": {},
 		"ghcr.io/devcontainers/features/dotnet:2": {},
-		"ghcr.io/jlaundry/devcontainer-features/azure-functions-core-tools:1": {}
+		"ghcr.io/jlaundry/devcontainer-features/azure-functions-core-tools:1": {},
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
 	},
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"ms-azuretools.vscode-bicep"
+				"ms-azuretools.vscode-bicep",
+				"ms-azuretools.vscode-azure-github-copilot"
 			]
 		}
 	}
