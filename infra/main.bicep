@@ -6,8 +6,8 @@ param location string = resourceGroup().location
 @maxLength(20)
 param appPrefix string = 'azres${uniqueString(resourceGroup().id)}'
 
-@description('The URL of the frontend application allowed to call the API (used for CORS). E.g. https://www.davisdre.me')
-param frontendUrl string = 'https://www.davisdre.me'
+@description('The URL of the frontend application allowed to call the API (used for CORS). E.g. https://resume.davisdre.com')
+param frontendUrl string = 'https://resume.davisdre.com'
 
 // Variable declarations for resource names
 var storageAccountName = '${appPrefix}stg'
