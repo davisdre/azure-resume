@@ -32,7 +32,7 @@ namespace tests
             response.SetupProperty(r => r.StatusCode, HttpStatusCode.OK);
             response.SetupProperty(r => r.Body, new MemoryStream());
 
-            request.Setup(r => r.CreateResponse()).Returns(response.Object);
+            request.Setup(r => r.CreateResponse(It.IsAny<HttpStatusCode>())).Returns(response.Object);
 
             var function = new Company.Function.GetResumeCounter(loggerFactory.Object);
 
