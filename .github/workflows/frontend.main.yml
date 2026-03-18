@@ -45,7 +45,7 @@ jobs:
       with:
         inlineScript: |
             az storage blob service-properties update --account-name ${{ steps.get-storage.outputs.storageAccountName }} --static-website --404-document index.html --index-document index.html
-            az storage blob upload-batch --account-name ${{ steps.get-storage.outputs.storageAccountName }} --auth-mode key -d '$web' -s frontend/ --overwrite
+            az storage blob upload-batch --account-name ${{ steps.get-storage.outputs.storageAccountName }} --auth-mode login -d '$web' -s frontend/ --overwrite
 
   # Azure logout
     - name: logout
