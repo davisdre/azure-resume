@@ -38,3 +38,17 @@ My own Azure resume, following [ACG project video](https://learn.acloud.guru/ser
 - Azure Functions
 - Azure Storage
 - Cloudflare
+
+## Recent updates (2026-03-18)
+- Fixed a production HTTP 500 on `GetResumeCounter` caused by a missing runtime assembly used by the Cosmos DB input binding.
+- Added explicit dependency management for `Microsoft.Bcl.AsyncInterfaces` in the backend function project.
+- Upgraded backend function packages to current versions:
+	- `Microsoft.Azure.Functions.Worker` `2.51.0`
+	- `Microsoft.Azure.Functions.Worker.Sdk` `2.0.7`
+	- `Microsoft.Azure.Functions.Worker.Extensions.Http` `3.3.0`
+	- `Microsoft.Azure.Functions.Worker.Extensions.CosmosDB` `4.14.0`
+	- `Microsoft.Bcl.AsyncInterfaces` `8.0.0`
+- Verified deployment and endpoint health in Azure (`/api/getresumecounter` returning `200 OK` with incrementing counter).
+- Updated repository ignore rules to keep generated/local files out of source control:
+	- `backend/tests/obj/`
+	- `.gemini/`
