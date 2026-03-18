@@ -8,6 +8,7 @@ on:
     - '.github/workflows/**'
 
 permissions:
+  contents: read
   id-token: write
 
 env:
@@ -52,6 +53,7 @@ jobs:
       run: |
         pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/tests'
         dotnet test
+        popd
     - name: 'Run Azure Functions Action'
       uses: Azure/functions-action@v1
       id: fa
