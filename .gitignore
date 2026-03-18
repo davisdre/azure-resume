@@ -197,6 +197,12 @@ StyleCopReport.xml
 *.svclog
 *.scc
 
+# Local tool/editor state
+.gemini/
+
+# Generated test build artifacts (keep out of source control)
+backend/tests/obj/
+
 # Chutzpah Test files
 _Chutzpah*
 
