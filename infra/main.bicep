@@ -6,6 +6,9 @@ param location string = resourceGroup().location
 @maxLength(20)
 param appPrefix string = 'azres${uniqueString(resourceGroup().id)}'
 
+@description('The URL of the frontend application allowed to call the API (used for CORS). E.g. https://resume.davisdre.com')
+param frontendUrl string = 'https://resume.davisdre.com'
+
 // Variable declarations for resource names
 var storageAccountName = '${appPrefix}stg'
 var cosmosDbName = '${appPrefix}db'
@@ -93,7 +96,7 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
       use32BitWorkerProcess: false // Run as a 64-bit process for .NET Isolated
       cors: {
         allowedOrigins: [
-          '*' // In production, consider restricting this strictly to your CDN domain
+          frontendUrl
         ]
       }
       appSettings: [
