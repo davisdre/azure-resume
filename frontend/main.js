@@ -4,13 +4,15 @@ window.addEventListener('DOMContentLoaded', (event) =>{
 
 const functionApiUrl = '__FUNCTION_API_URL__';
 const localfunctionApi = 'http://localhost:7071/api/GetResumeCounter';
+const relativeFunctionApi = '/api/GetResumeCounter';
 
 const getApiUrl = () => {
     if (functionApiUrl && functionApiUrl !== '__FUNCTION_API_URL__') {
         return functionApiUrl;
     }
 
-    return localfunctionApi;
+    const isLocalHost = ['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname);
+    return isLocalHost ? localfunctionApi : relativeFunctionApi;
 };
 
 const setCounterStatus = (message = '') => {
