@@ -26,26 +26,38 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-    - name: 'Get Storage Account name from deployment output'
-      id: get-storage
+    - name: 'Resolve deployment outputs (storage + function URL)'
+      id: get-outputs
       run: |
-        echo "storageAccountName=$(az deployment group show --resource-group $AZURE_RESOURCE_GROUP --name $AZURE_DEPLOYMENT_NAME --query properties.outputs.storageAccountName.value -o tsv)" >> $GITHUB_OUTPUT
+        deploymentName="$AZURE_DEPLOYMENT_NAME"
 
-    - name: 'Get Function App URL from deployment output'
-      id: get-functionapp
-      run: |
-        functionAppUrl=$(az deployment group show --resource-group $AZURE_RESOURCE_GROUP --name $AZURE_DEPLOYMENT_NAME --query properties.outputs.functionAppUrl.value -o tsv)
+        storageAccountName=$(az deployment group show --resource-group "$AZURE_RESOURCE_GROUP" --name "$deploymentName" --query properties.outputs.storageAccountName.value -o tsv 2>/dev/null || true)
+        functionAppUrl=$(az deployment group show --resource-group "$AZURE_RESOURCE_GROUP" --name "$deploymentName" --query properties.outputs.functionAppUrl.value -o tsv 2>/dev/null || true)
 
-        if [ -z "$functionAppUrl" ] || [ "$functionAppUrl" = "null" ]; then
-          echo "Function App URL output is empty. Check deployment name/resource group and Bicep outputs."
+        if [ -z "$storageAccountName" ] || [ "$storageAccountName" = "null" ] || [ -z "$functionAppUrl" ] || [ "$functionAppUrl" = "null" ]; then
+          deploymentName=$(az deployment group list --resource-group "$AZURE_RESOURCE_GROUP" --query "[?properties.provisioningState=='Succeeded' && properties.outputs.storageAccountName.value != null && properties.outputs.functionAppUrl.value != null] | sort_by(@,&properties.timestamp) | [-1].name" -o tsv)
+
+          if [ -z "$deploymentName" ] || [ "$deploymentName" = "null" ]; then
+            echo "No successful deployment found with both storageAccountName and functionAppUrl outputs in resource group $AZURE_RESOURCE_GROUP."
+            exit 1
+          fi
+
+          storageAccountName=$(az deployment group show --resource-group "$AZURE_RESOURCE_GROUP" --name "$deploymentName" --query properties.outputs.storageAccountName.value -o tsv)
+          functionAppUrl=$(az deployment group show --resource-group "$AZURE_RESOURCE_GROUP" --name "$deploymentName" --query properties.outputs.functionAppUrl.value -o tsv)
+        fi
+
+        if [ -z "$storageAccountName" ] || [ "$storageAccountName" = "null" ] || [ -z "$functionAppUrl" ] || [ "$functionAppUrl" = "null" ]; then
+          echo "Deployment '$deploymentName' is missing required outputs (storageAccountName/functionAppUrl)."
           exit 1
         fi
 
+        echo "Using deployment: $deploymentName"
+        echo "storageAccountName=$storageAccountName" >> $GITHUB_OUTPUT
         echo "functionAppUrl=$functionAppUrl" >> $GITHUB_OUTPUT
 
     - name: 'Inject Function App URL into main.js'
       run: |
-        sed -i "s|__FUNCTION_API_URL__|${{ steps.get-functionapp.outputs.functionAppUrl }}|g" frontend/main.js
+        sed -i "s|__FUNCTION_API_URL__|${{ steps.get-outputs.outputs.functionAppUrl }}|g" frontend/main.js
 
         if grep -q "__FUNCTION_API_URL__" frontend/main.js; then
           echo "Function API URL placeholder was not replaced in frontend/main.js"
@@ -56,8 +68,8 @@ jobs:
       uses: azure/cli@v2
       with:
         inlineScript: |
-            az storage blob service-properties update --account-name ${{ steps.get-storage.outputs.storageAccountName }} --static-website --404-document index.html --index-document index.html
-            az storage blob upload-batch --account-name ${{ steps.get-storage.outputs.storageAccountName }} --auth-mode login -d '$web' -s frontend/ --overwrite
+            az storage blob service-properties update --account-name ${{ steps.get-outputs.outputs.storageAccountName }} --static-website --404-document index.html --index-document index.html
+            az storage blob upload-batch --account-name ${{ steps.get-outputs.outputs.storageAccountName }} --auth-mode login -d '$web' -s frontend/ --overwrite
 
   # Azure logout
     - name: logout
