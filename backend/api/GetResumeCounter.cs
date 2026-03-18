@@ -45,7 +45,7 @@ namespace Company.Function
     // Class to handle multiple outputs (HTTP Response + CosmosDB Document Update)
     public class MultiResponse
     {
-        [CosmosDBOutput(databaseName: "AzureResume", containerName: "Counter", Connection = "AzureResumeConnectionString", CreateIfNotExists = false)]
+        [CosmosDBOutput(databaseName: "AzureResume", containerName: "Counter", Connection = "AzureResumeConnectionString", CreateIfNotExists = true)]
         public required Counter Document { get; set; }
 
         public required HttpResponseData HttpResponse { get; set; }
