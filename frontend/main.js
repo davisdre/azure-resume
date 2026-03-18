@@ -4,7 +4,6 @@ window.addEventListener('DOMContentLoaded', (event) =>{
 
 const functionApiUrl = '__FUNCTION_API_URL__';
 const localfunctionApi = 'http://localhost:7071/api/GetResumeCounter';
-const relativeFunctionApi = '/api/GetResumeCounter';
 
 const getApiUrl = () => {
     if (functionApiUrl && functionApiUrl !== '__FUNCTION_API_URL__') {
@@ -12,7 +11,7 @@ const getApiUrl = () => {
     }
 
     const isLocalHost = ['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname);
-    return isLocalHost ? localfunctionApi : relativeFunctionApi;
+    return isLocalHost ? localfunctionApi : '';
 };
 
 const setCounterStatus = (message = '') => {
@@ -36,6 +35,11 @@ const setCounterStatus = (message = '') => {
 const getVisitCount = () => {
     let count = 30;
     const apiUrl = getApiUrl();
+
+    if (!apiUrl) {
+        setCounterStatus('counter not configured');
+        return count;
+    }
 
     fetch(apiUrl).then(async response => {
         const contentType = response.headers.get('content-type') || '';

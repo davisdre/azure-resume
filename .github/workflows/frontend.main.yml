@@ -34,11 +34,23 @@ jobs:
     - name: 'Get Function App URL from deployment output'
       id: get-functionapp
       run: |
-        echo "functionAppUrl=$(az deployment group show --resource-group $AZURE_RESOURCE_GROUP --name $AZURE_DEPLOYMENT_NAME --query properties.outputs.functionAppUrl.value -o tsv)" >> $GITHUB_OUTPUT
+        functionAppUrl=$(az deployment group show --resource-group $AZURE_RESOURCE_GROUP --name $AZURE_DEPLOYMENT_NAME --query properties.outputs.functionAppUrl.value -o tsv)
+
+        if [ -z "$functionAppUrl" ] || [ "$functionAppUrl" = "null" ]; then
+          echo "Function App URL output is empty. Check deployment name/resource group and Bicep outputs."
+          exit 1
+        fi
+
+        echo "functionAppUrl=$functionAppUrl" >> $GITHUB_OUTPUT
 
     - name: 'Inject Function App URL into main.js'
       run: |
         sed -i "s|__FUNCTION_API_URL__|${{ steps.get-functionapp.outputs.functionAppUrl }}|g" frontend/main.js
+
+        if grep -q "__FUNCTION_API_URL__" frontend/main.js; then
+          echo "Function API URL placeholder was not replaced in frontend/main.js"
+          exit 1
+        fi
 
     - name: Upload to blob storage
       uses: azure/cli@v2
