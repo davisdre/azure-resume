@@ -31,6 +31,15 @@ jobs:
       run: |
         echo "storageAccountName=$(az deployment group show --resource-group $AZURE_RESOURCE_GROUP --name $AZURE_DEPLOYMENT_NAME --query properties.outputs.storageAccountName.value -o tsv)" >> $GITHUB_OUTPUT
 
+    - name: 'Get Function App URL from deployment output'
+      id: get-functionapp
+      run: |
+        echo "functionAppUrl=$(az deployment group show --resource-group $AZURE_RESOURCE_GROUP --name $AZURE_DEPLOYMENT_NAME --query properties.outputs.functionAppUrl.value -o tsv)" >> $GITHUB_OUTPUT
+
+    - name: 'Inject Function App URL into main.js'
+      run: |
+        sed -i "s|__FUNCTION_API_URL__|${{ steps.get-functionapp.outputs.functionAppUrl }}|g" frontend/main.js
+
     - name: Upload to blob storage
       uses: azure/cli@v2
       with:

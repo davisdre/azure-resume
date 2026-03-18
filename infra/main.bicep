@@ -133,4 +133,5 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
 // Exported Outputs to use in GitHub Actions easily later
 output storageAccountName string = storageAccount.name
 output functionAppName string = functionApp.name
+output functionAppUrl string = 'https://${functionApp.properties.defaultHostName}/api/GetResumeCounter'
 output staticWebsiteUrl string = storageAccount.properties.primaryEndpoints.web
