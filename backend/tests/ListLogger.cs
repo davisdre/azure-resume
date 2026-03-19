@@ -9,7 +9,7 @@ namespace tests
     {
         public IList<string> Logs;
 
-        public IDisposable BeginScope<TState>(TState state) => NullScope.Instance;
+        public IDisposable BeginScope<TState>(TState state) where TState : notnull => NullScope.Instance;
 
         public bool IsEnabled(LogLevel logLevel) => false;
 
@@ -21,8 +21,8 @@ namespace tests
         public void Log<TState>(LogLevel logLevel,
                                 EventId eventId,
                                 TState state,
-                                Exception exception,
-                                Func<TState, Exception, string> formatter)
+                                Exception? exception,
+                                Func<TState, Exception?, string> formatter)
         {
             string message = formatter(state, exception);
             this.Logs.Add(message);

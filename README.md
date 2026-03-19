@@ -24,17 +24,31 @@ My own Azure resume, following [ACG project video](https://learn.acloud.guru/ser
 ## Third Steps
 - Deployed Frontend folder to Azure Blob Storage via Visual Studio Code Extension: Azure Storage.
 - Updated CORS setting on Azure function to reflect URL of Azure Blog Storage.
-- Create Azure CDN for our Azure Blob Storage.
-- Added custom domain to CDN, [www.davisdre.me](https://www.davisdre.me).
-- Enable HTTPS on the Azure CDN.
+- Create Cloudflare distribution for our Azure Blob Storage.
+- Added custom domain to Cloudflare, [www.davisdre.me](https://www.davisdre.me).
+- Enable HTTPS on Cloudflare.
 - Added my custom domain to CORS policy for Azure Function.
 
 ## Fourth Steps
 - Setup CI/CD.
 - Created GitHub workflows for backend and frontend to be trigger on push oin those respective folders. 
 
-## Azure Technologies being used
+## Technologies being used
 - Azure CosmosDB
 - Azure Functions
 - Azure Storage
-- Azure CDN
+- Cloudflare
+
+## Recent updates (2026-03-18)
+- Fixed a production HTTP 500 on `GetResumeCounter` caused by a missing runtime assembly used by the Cosmos DB input binding.
+- Added explicit dependency management for `Microsoft.Bcl.AsyncInterfaces` in the backend function project.
+- Upgraded backend function packages to current versions:
+	- `Microsoft.Azure.Functions.Worker` `2.51.0`
+	- `Microsoft.Azure.Functions.Worker.Sdk` `2.0.7`
+	- `Microsoft.Azure.Functions.Worker.Extensions.Http` `3.3.0`
+	- `Microsoft.Azure.Functions.Worker.Extensions.CosmosDB` `4.14.0`
+	- `Microsoft.Bcl.AsyncInterfaces` `8.0.0`
+- Verified deployment and endpoint health in Azure (`/api/getresumecounter` returning `200 OK` with incrementing counter).
+- Updated repository ignore rules to keep generated/local files out of source control:
+	- `backend/tests/obj/`
+	- `.gemini/`
