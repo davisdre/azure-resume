@@ -32,23 +32,34 @@ jobs:
       run: |
         deploymentName="$AZURE_DEPLOYMENT_NAME"
 
-        storageAccountName=$(az deployment group show --resource-group "$AZURE_RESOURCE_GROUP" --name "$deploymentName" --query properties.outputs.storageAccountName.value -o tsv 2>/dev/null || true)
-        functionAppUrl=$(az deployment group show --resource-group "$AZURE_RESOURCE_GROUP" --name "$deploymentName" --query properties.outputs.functionAppUrl.value -o tsv 2>/dev/null || true)
+        get_outputs() {
+          local dname=$1
+          storageAccountName=$(az deployment group show --resource-group "$AZURE_RESOURCE_GROUP" --name "$dname" --query properties.outputs.storageAccountName.value -o tsv 2>/dev/null || true)
+          functionAppUrl=$(az deployment group show --resource-group "$AZURE_RESOURCE_GROUP" --name "$dname" --query properties.outputs.functionAppUrl.value -o tsv 2>/dev/null || true)
+          
+          if [ -z "$functionAppUrl" ] || [ "$functionAppUrl" = "null" ]; then
+            functionAppName=$(az deployment group show --resource-group "$AZURE_RESOURCE_GROUP" --name "$dname" --query properties.outputs.functionAppName.value -o tsv 2>/dev/null || true)
+            if [ -n "$functionAppName" ] && [ "$functionAppName" != "null" ]; then
+              functionAppUrl="https://${functionAppName}.azurewebsites.net/api/GetResumeCounter"
+            fi
+          fi
+        }
+
+        get_outputs "$deploymentName"
 
         if [ -z "$storageAccountName" ] || [ "$storageAccountName" = "null" ] || [ -z "$functionAppUrl" ] || [ "$functionAppUrl" = "null" ]; then
-          deploymentName=$(az deployment group list --resource-group "$AZURE_RESOURCE_GROUP" --query "[?properties.provisioningState=='Succeeded' && properties.outputs.storageAccountName.value != null && properties.outputs.functionAppUrl.value != null] | sort_by(@,&properties.timestamp) | [-1].name" -o tsv)
+          deploymentName=$(az deployment group list --resource-group "$AZURE_RESOURCE_GROUP" --query "[?properties.provisioningState=='Succeeded' && properties.outputs.storageAccountName.value != null] | sort_by(@,&properties.timestamp) | [-1].name" -o tsv)
 
           if [ -z "$deploymentName" ] || [ "$deploymentName" = "null" ]; then
-            echo "No successful deployment found with both storageAccountName and functionAppUrl outputs in resource group $AZURE_RESOURCE_GROUP."
+            echo "No successful deployment found with storageAccountName output in resource group $AZURE_RESOURCE_GROUP."
             exit 1
           fi
 
-          storageAccountName=$(az deployment group show --resource-group "$AZURE_RESOURCE_GROUP" --name "$deploymentName" --query properties.outputs.storageAccountName.value -o tsv)
-          functionAppUrl=$(az deployment group show --resource-group "$AZURE_RESOURCE_GROUP" --name "$deploymentName" --query properties.outputs.functionAppUrl.value -o tsv)
+          get_outputs "$deploymentName"
         fi
 
         if [ -z "$storageAccountName" ] || [ "$storageAccountName" = "null" ] || [ -z "$functionAppUrl" ] || [ "$functionAppUrl" = "null" ]; then
-          echo "Deployment '$deploymentName' is missing required outputs (storageAccountName/functionAppUrl)."
+          echo "Deployment '$deploymentName' is missing required outputs (storageAccountName/functionAppUrl or functionAppName)."
           exit 1
         fi
 
