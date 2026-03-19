@@ -9,6 +9,7 @@ on:
         - '.github/workflows/**'
 
 permissions:
+  contents: read
   id-token: write
 
 env:
