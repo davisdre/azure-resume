@@ -6,7 +6,7 @@ const functionApiUrl = '__FUNCTION_API_URL__';
 const localfunctionApi = 'http://localhost:7071/api/GetResumeCounter';
 
 const getApiUrl = () => {
-    if (functionApiUrl && functionApiUrl !== '__FUNCTION_API_URL__') {
+    if (functionApiUrl && functionApiUrl.startsWith('http')) {
         return functionApiUrl;
     }
 
