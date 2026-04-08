@@ -78,11 +78,9 @@ jobs:
         fi
 
     - name: Upload to blob storage
-      uses: azure/cli@v2
-      with:
-        inlineScript: |
-            az storage blob service-properties update --account-name ${{ steps.get-outputs.outputs.storageAccountName }} --static-website --404-document index.html --index-document index.html
-            az storage blob upload-batch --account-name ${{ steps.get-outputs.outputs.storageAccountName }} --auth-mode login -d '$web' -s frontend/ --overwrite
+      run: |
+        az storage blob service-properties update --account-name ${{ steps.get-outputs.outputs.storageAccountName }} --static-website --404-document index.html --index-document index.html
+        az storage blob upload-batch --account-name ${{ steps.get-outputs.outputs.storageAccountName }} --auth-mode login -d '$web' -s frontend/ --overwrite
 
   # Azure logout
     - name: logout
