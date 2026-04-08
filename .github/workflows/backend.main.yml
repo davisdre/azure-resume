@@ -24,6 +24,10 @@ jobs:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@v4
 
+    - name: 'Install Azure CLI'
+      run: |
+        curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash || curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+
     - name: 'Login via Azure CLI'
       uses: azure/login@v2
       with:
@@ -43,13 +47,13 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: 'Resolve Project Dependencies Using Dotnet'
-      shell: pwsh
+      shell: bash
       run: |
         pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/api'
         dotnet publish --configuration Release --output ./output
         popd
     - name: 'Run unit test'
-      shell: pwsh
+      shell: bash
       run: |
         pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/tests'
         dotnet test
