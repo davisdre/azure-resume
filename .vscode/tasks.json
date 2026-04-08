@@ -68,14 +68,19 @@
       }
     },
     {
-      "type": "func",
+      "label": "host start",
+      "type": "process",
       "dependsOn": "build (functions)",
       "options": {
         "cwd": "${workspaceFolder}/backend/api/bin/Debug/net8.0"
       },
-      "command": "host start",
+      "command": "func",
+      "args": [
+        "host",
+        "start"
+      ],
       "isBackground": true,
-      "problemMatcher": "$func-dotnet-watch"
+      "problemMatcher": "$msCompile"
     }
   ]
 }
