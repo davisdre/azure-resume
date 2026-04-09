@@ -38,12 +38,12 @@ jobs:
       - name: Run Template Analyzer (Console)
         continue-on-error: true # Allow evaluation warnings for now, but report results
         run: |
-          template-analyzer/TemplateAnalyzer analyze-directory infra/ --report-format Console --severity 1 -v
+          template-analyzer/TemplateAnalyzer analyze-directory infra/ --report-format Console -v
 
       - name: Run Template Analyzer (SARIF)
         if: always()
         run: |
-          template-analyzer/TemplateAnalyzer analyze-directory infra/ --report-format Sarif -o results.sarif --severity 1
+          template-analyzer/TemplateAnalyzer analyze-directory infra/ --report-format Sarif -o results.sarif
 
       - name: Upload SARIF Report
         if: always()
