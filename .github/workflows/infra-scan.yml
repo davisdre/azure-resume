@@ -26,7 +26,7 @@ jobs:
           echo "Latest version is $VERSION"
           
           # Download the linux-x64 binary
-          curl -L "https://github.com/Azure/template-analyzer/releases/download/${VERSION}/template-analyzer-linux-x64.zip" -o analyzer.zip
+          curl -L "https://github.com/Azure/template-analyzer/releases/download/${VERSION}/TemplateAnalyzer-linux-x64.zip" -o analyzer.zip
           
           # Unzip the package
           unzip analyzer.zip -d template-analyzer
@@ -37,4 +37,4 @@ jobs:
 
       - name: Run Template Analyzer on Infrastructure
         run: |
-          ./template-analyzer/TemplateAnalyzer analyze-directory infra/
+          template-analyzer/TemplateAnalyzer analyze-directory infra/
