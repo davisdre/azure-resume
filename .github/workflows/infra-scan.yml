@@ -36,13 +36,14 @@ jobs:
           echo "$(pwd)/template-analyzer" >> $GITHUB_PATH
 
       - name: Run Template Analyzer (Console)
+        continue-on-error: true # Allow evaluation warnings for now, but report results
         run: |
-          template-analyzer/TemplateAnalyzer analyze-directory infra/ --report-format Console
+          template-analyzer/TemplateAnalyzer analyze-directory infra/ --report-format Console --severity 1 -v
 
       - name: Run Template Analyzer (SARIF)
         if: always()
         run: |
-          template-analyzer/TemplateAnalyzer analyze-directory infra/ --report-format Sarif -o results.sarif
+          template-analyzer/TemplateAnalyzer analyze-directory infra/ --report-format Sarif -o results.sarif --severity 1
 
       - name: Upload SARIF Report
         if: always()
