@@ -87,3 +87,6 @@ jobs:
       run: |
             az logout
       if: always()
+    - name: Cleanup
+      if: always()
+      run: rm -rf *
