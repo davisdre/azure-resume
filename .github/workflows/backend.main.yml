@@ -62,3 +62,6 @@ jobs:
       with:
         app-name: ${{ steps.get-functionapp.outputs.functionAppName }}
         package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/api/output'
+    - name: Cleanup
+      if: always()
+      run: rm -rf *
