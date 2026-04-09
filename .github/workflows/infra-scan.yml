@@ -35,6 +35,18 @@ jobs:
           # Add to PATH (temporarily for the next step)
           echo "$(pwd)/template-analyzer" >> $GITHUB_PATH
 
-      - name: Run Template Analyzer on Infrastructure
+      - name: Run Template Analyzer (Console)
         run: |
-          template-analyzer/TemplateAnalyzer analyze-directory infra/
+          template-analyzer/TemplateAnalyzer analyze-directory infra/ --report-format Console
+
+      - name: Run Template Analyzer (SARIF)
+        if: always()
+        run: |
+          template-analyzer/TemplateAnalyzer analyze-directory infra/ --report-format Sarif -o results.sarif
+
+      - name: Upload SARIF Report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: infrastructure-scan-sarif
+          path: results.sarif
