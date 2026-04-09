@@ -23,6 +23,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: 'Install Azure CLI'
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash || curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+
       - name: 'Login via Azure CLI'
         uses: azure/login@v2
         with:
