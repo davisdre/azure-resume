@@ -505,3 +505,9 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Analysis & Build Artifacts
+analyzer.zip
+template-analyzer/
+frontend_build/
+results.sarif

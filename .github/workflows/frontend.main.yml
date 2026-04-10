@@ -6,7 +6,7 @@ on:
         branches: [ main, dev ]
         paths:
         - 'frontend/**'
-        - '.github/workflows/**'
+        - '.github/workflows/frontend.main.yml'
 
 permissions:
   contents: read
@@ -79,7 +79,7 @@ jobs:
 
     - name: Upload to blob storage
       run: |
-        az storage blob service-properties update --account-name ${{ steps.get-outputs.outputs.storageAccountName }} --static-website --404-document index.html --index-document index.html
+        az storage blob service-properties update --account-name ${{ steps.get-outputs.outputs.storageAccountName }} --auth-mode login --static-website --404-document index.html --index-document index.html
         az storage blob upload-batch --account-name ${{ steps.get-outputs.outputs.storageAccountName }} --auth-mode login -d '$web' -s frontend/ --overwrite
 
   # Azure logout
@@ -87,3 +87,6 @@ jobs:
       run: |
             az logout
       if: always()
+    - name: Cleanup
+      if: always()
+      run: rm -rf *
