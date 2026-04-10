@@ -1,12 +1,17 @@
-name: deploy_frontend
+name: Gitea Actions - Deploy Frontend
 # Deploys when pish is made from the frontend folder
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 on:
     push:
         branches: [ main, dev ]
         paths:
         - 'frontend/**'
-        - '.github/workflows/frontend.main.yml'
+        - '.gitea/workflows/frontend.main.yml'
 
 permissions:
   contents: read

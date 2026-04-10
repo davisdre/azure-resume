@@ -1,11 +1,16 @@
-name: Infrastructure Security Scan
+name: Gitea Actions - Infrastructure Security Scan
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 on:
   push:
     branches: [ main, "feature/*" ]
     paths:
       - 'infra/**'
-      - '.github/workflows/infra-scan.yml'
+      - '.gitea/workflows/infra-scan.yml'
   pull_request:
     branches: [ main ]
     paths:
