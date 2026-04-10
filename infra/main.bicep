@@ -50,6 +50,7 @@ resource cosmosDbAccount 'Microsoft.DocumentDB/databaseAccounts@2023-04-15' = {
     ]
     enableFreeTier: enableFreeTier // Use parameter to manage free tier across environments
     disableLocalAuth: true // Hardened: Disabling account key-based access for Cosmos DB
+    disableKeyBasedMetadataWriteAccess: true // Hardened: Restrict access to data plane
   }
 }
 
