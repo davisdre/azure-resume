@@ -1,11 +1,16 @@
-name: deploy_backend
+name: Gitea Actions - Deploy Backend
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 on:
   push:
     branches: [main, dev]
     paths:
     - 'backend/**'
-    - '.github/workflows/backend.main.yml'
+    - '.gitea/workflows/backend.main.yml'
 
 permissions:
   contents: read
@@ -21,7 +26,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: 'Checkout GitHub Action'
+    - name: 'Checkout Repo'
       uses: actions/checkout@v4
 
     - name: 'Install Azure CLI'
@@ -43,6 +48,7 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
+        cache: true
 
     - name: 'Resolve Project Dependencies Using Dotnet'
       shell: bash

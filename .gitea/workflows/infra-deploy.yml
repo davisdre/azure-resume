@@ -1,11 +1,16 @@
-name: deploy_infra
+name: Gitea Actions - Deploy Infrastructure
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 on:
   push:
     branches: [main]
     paths:
       - 'infra/**'
-      - '.github/workflows/infra-deploy.yml'
+      - '.gitea/workflows/infra-deploy.yml'
 
 permissions:
   contents: read

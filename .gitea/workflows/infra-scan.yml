@@ -1,11 +1,16 @@
-name: Infrastructure Security Scan
+name: Gitea Actions - Infrastructure Security Scan
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 on:
   push:
     branches: [ main, "feature/*" ]
     paths:
       - 'infra/**'
-      - '.github/workflows/infra-scan.yml'
+      - '.gitea/workflows/infra-scan.yml'
   pull_request:
     branches: [ main ]
     paths:
@@ -40,14 +45,3 @@ jobs:
         run: |
           template-analyzer/TemplateAnalyzer analyze-directory infra/ --report-format Console -v
 
-      - name: Run Template Analyzer (SARIF)
-        if: always()
-        run: |
-          template-analyzer/TemplateAnalyzer analyze-directory infra/ --report-format Sarif -o results.sarif
-
-      - name: Upload SARIF Report
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: infrastructure-scan-sarif
-          path: results.sarif
