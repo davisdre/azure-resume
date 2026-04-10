@@ -29,7 +29,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   properties: {
     minimumTlsVersion: 'TLS1_2'
     supportsHttpsTrafficOnly: true
-    allowBlobPublicAccess: false // Hardened: Disabling public access
+    allowBlobPublicAccess: false // Hardened: Disabling public access (Resolves #23)
     allowSharedKeyAccess: false // Hardened: Disabling account key-based access
   }
 }
