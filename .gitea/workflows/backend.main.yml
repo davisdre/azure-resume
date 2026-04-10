@@ -48,7 +48,7 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
-        cache: true
+        # cache: true removed — requires packages.lock.json which does not exist in this repo (fixes run #65)
 
     - name: 'Resolve Project Dependencies Using Dotnet'
       shell: bash
