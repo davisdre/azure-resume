@@ -1,0 +1,97 @@
+name: Gitea Actions - Deploy Frontend
+# Deploys when pish is made from the frontend folder
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+    push:
+        branches: [ main, dev ]
+        paths:
+        - 'frontend/**'
+        - '.gitea/workflows/frontend.main.yml'
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  AZURE_RESOURCE_GROUP: 'azresrg'          # Resource group containing the deployed infra
+  AZURE_DEPLOYMENT_NAME: 'azresrgdev2'     # Deployment name used for Bicep deployment
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: 'Install Azure CLI'
+      run: |
+        curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash || curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+    - uses: azure/login@v2
+      with:
+          creds: '{"clientId":"${{ secrets.AZURE_CLIENT_ID }}","clientSecret":"${{ secrets.AZURE_CREDENTIALS }}","subscriptionId":"${{ secrets.AZURE_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.AZURE_TENANT_ID }}"}'
+
+    - name: 'Resolve deployment outputs (storage + function URL)'
+      id: get-outputs
+      run: |
+        deploymentName="$AZURE_DEPLOYMENT_NAME"
+
+        get_outputs() {
+          local dname=$1
+          storageAccountName=$(az deployment group show --resource-group "$AZURE_RESOURCE_GROUP" --name "$dname" --query properties.outputs.storageAccountName.value -o tsv 2>/dev/null || true)
+          functionAppUrl=$(az deployment group show --resource-group "$AZURE_RESOURCE_GROUP" --name "$dname" --query properties.outputs.functionAppUrl.value -o tsv 2>/dev/null || true)
+          
+          if [ -z "$functionAppUrl" ] || [ "$functionAppUrl" = "null" ]; then
+            functionAppName=$(az deployment group show --resource-group "$AZURE_RESOURCE_GROUP" --name "$dname" --query properties.outputs.functionAppName.value -o tsv 2>/dev/null || true)
+            if [ -n "$functionAppName" ] && [ "$functionAppName" != "null" ]; then
+              functionAppUrl="https://${functionAppName}.azurewebsites.net/api/GetResumeCounter"
+            fi
+          fi
+        }
+
+        get_outputs "$deploymentName"
+
+        if [ -z "$storageAccountName" ] || [ "$storageAccountName" = "null" ] || [ -z "$functionAppUrl" ] || [ "$functionAppUrl" = "null" ]; then
+          deploymentName=$(az deployment group list --resource-group "$AZURE_RESOURCE_GROUP" --query "[?properties.provisioningState=='Succeeded' && properties.outputs.storageAccountName.value != null] | sort_by(@,&properties.timestamp) | [-1].name" -o tsv)
+
+          if [ -z "$deploymentName" ] || [ "$deploymentName" = "null" ]; then
+            echo "No successful deployment found with storageAccountName output in resource group $AZURE_RESOURCE_GROUP."
+            exit 1
+          fi
+
+          get_outputs "$deploymentName"
+        fi
+
+        if [ -z "$storageAccountName" ] || [ "$storageAccountName" = "null" ] || [ -z "$functionAppUrl" ] || [ "$functionAppUrl" = "null" ]; then
+          echo "Deployment '$deploymentName' is missing required outputs (storageAccountName/functionAppUrl or functionAppName)."
+          exit 1
+        fi
+
+        echo "Using deployment: $deploymentName"
+        echo "storageAccountName=$storageAccountName" >> $GITHUB_OUTPUT
+        echo "functionAppUrl=$functionAppUrl" >> $GITHUB_OUTPUT
+
+    - name: 'Inject Function App URL into main.js'
+      run: |
+        sed -i "s|__FUNCTION_API_URL__|${{ steps.get-outputs.outputs.functionAppUrl }}|g" frontend/main.js
+
+        if grep -q "__FUNCTION_API_URL__" frontend/main.js; then
+          echo "Function API URL placeholder was not replaced in frontend/main.js"
+          exit 1
+        fi
+
+    - name: Upload to blob storage
+      run: |
+        az storage blob service-properties update --account-name ${{ steps.get-outputs.outputs.storageAccountName }} --auth-mode login --static-website --404-document index.html --index-document index.html
+        az storage blob upload-batch --account-name ${{ steps.get-outputs.outputs.storageAccountName }} --auth-mode login -d '$web' -s frontend/ --overwrite
+
+  # Azure logout
+    - name: logout
+      run: |
+            az logout
+      if: always()
+    - name: Cleanup
+      if: always()
+      run: rm -rf *

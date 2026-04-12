@@ -1,0 +1,73 @@
+name: Gitea Actions - Deploy Backend
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches: [main, dev]
+    paths:
+    - 'backend/**'
+    - '.gitea/workflows/backend.main.yml'
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  AZURE_RESOURCE_GROUP: 'azresrg'          # Resource group containing the deployed infra
+  AZURE_DEPLOYMENT_NAME: 'azresrgdev2'     # Deployment name used for Bicep deployment
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'backend' # set this to the path to your web app project
+  DOTNET_VERSION: '8.0'                    # set this to the dotnet version to use
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Checkout Repo'
+      uses: actions/checkout@v4
+
+    - name: 'Install Azure CLI'
+      run: |
+        curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash || curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v2
+      with:
+          creds: '{"clientId":"${{ secrets.AZURE_CLIENT_ID }}","clientSecret":"${{ secrets.AZURE_CREDENTIALS }}","subscriptionId":"${{ secrets.AZURE_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.AZURE_TENANT_ID }}"}'
+
+    - name: 'Get Function App name from deployment output'
+      id: get-functionapp
+      shell: bash
+      run: |
+        echo "functionAppName=$(az deployment group show --resource-group $AZURE_RESOURCE_GROUP --name $AZURE_DEPLOYMENT_NAME --query properties.outputs.functionAppName.value -o tsv)" >> $GITHUB_OUTPUT
+
+    - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+        # cache: true removed — requires packages.lock.json which does not exist in this repo (fixes run #65)
+
+    - name: 'Resolve Project Dependencies Using Dotnet'
+      shell: bash
+      run: |
+        pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/api'
+        dotnet publish --configuration Release --output ./output
+        popd
+    - name: 'Run unit test'
+      shell: bash
+      run: |
+        pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/tests'
+        dotnet test
+        popd
+    - name: 'Run Azure Functions Action'
+      uses: Azure/functions-action@v1
+      id: fa
+      with:
+        app-name: ${{ steps.get-functionapp.outputs.functionAppName }}
+        package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/api/output'
+    - name: Cleanup
+      if: always()
+      run: rm -rf *

@@ -1,0 +1,50 @@
+name: Gitea Actions - Deploy Infrastructure
+
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'infra/**'
+      - '.gitea/workflows/infra-deploy.yml'
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  AZURE_RESOURCE_GROUP: 'azresrg'
+  AZURE_DEPLOYMENT_NAME: 'azres_prod_deploy'
+
+jobs:
+  deploy:
+    name: Deploy Bicep to Production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 'Install Azure CLI'
+        run: |
+          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash || curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v2
+        with:
+            creds: '{"clientId":"${{ secrets.AZURE_CLIENT_ID }}","clientSecret":"${{ secrets.AZURE_CREDENTIALS }}","subscriptionId":"${{ secrets.AZURE_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.AZURE_TENANT_ID }}"}'
+
+      - name: Deploy Infrastructure
+        run: |
+          az deployment group create \
+            --resource-group ${{ env.AZURE_RESOURCE_GROUP }} \
+            --name ${{ env.AZURE_DEPLOYMENT_NAME }} \
+            --template-file infra/main.bicep \
+            --parameters location='eastus'
+
+      - name: Cleanup
+        if: always()
+        run: rm -rf *
