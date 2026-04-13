@@ -102,6 +102,7 @@ resource functionApp 'Microsoft.Web/sites@2022-09-01' = {
     serverFarmId: appServicePlan.id
     httpsOnly: true
     siteConfig: {
+      ftpsState: 'FtpsOnly'
       netFrameworkVersion: 'v8.0' // Explicitly set .NET 8
       use32BitWorkerProcess: false // Run as a 64-bit process for .NET Isolated
       cors: {
