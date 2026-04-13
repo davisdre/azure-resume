@@ -1,4 +1,4 @@
-name: Gitea Actions - Deploy Frontend
+name: GitHub Actions - Deploy Frontend
 # Deploys when pish is made from the frontend folder
 
 
@@ -11,7 +11,7 @@ on:
         branches: [ main, dev ]
         paths:
         - 'frontend/**'
-        - '.gitea/workflows/frontend.main.yml'
+        - '.github/workflows/frontend.main.yml'
 
 permissions:
   contents: read

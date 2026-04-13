@@ -1,4 +1,4 @@
-name: Gitea Actions - Deploy Infrastructure
+name: GitHub Actions - Deploy Infrastructure
 
 
 concurrency:
@@ -10,7 +10,7 @@ on:
     branches: [main]
     paths:
       - 'infra/**'
-      - '.gitea/workflows/infra-deploy.yml'
+      - '.github/workflows/infra-deploy.yml'
 
 permissions:
   contents: read

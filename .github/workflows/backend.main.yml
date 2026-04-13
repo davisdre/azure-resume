@@ -1,4 +1,4 @@
-name: Gitea Actions - Deploy Backend
+name: GitHub Actions - Deploy Backend
 
 
 concurrency:
@@ -10,7 +10,7 @@ on:
     branches: [main, dev]
     paths:
     - 'backend/**'
-    - '.gitea/workflows/backend.main.yml'
+    - '.github/workflows/backend.main.yml'
 
 permissions:
   contents: read
