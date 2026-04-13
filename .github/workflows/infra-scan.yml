@@ -1,4 +1,4 @@
-name: Gitea Actions - Infrastructure Security Scan
+name: GitHub Actions - Infrastructure Security Scan
 
 
 concurrency:
@@ -10,11 +10,12 @@ on:
     branches: [ main, "feature/*" ]
     paths:
       - 'infra/**'
-      - '.gitea/workflows/infra-scan.yml'
+      - '.github/workflows/infra-scan.yml'
   pull_request:
     branches: [ main ]
     paths:
       - 'infra/**'
+      - '.github/workflows/infra-scan.yml'
 
 jobs:
   template-analyzer:
