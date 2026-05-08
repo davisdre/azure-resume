@@ -33,6 +33,54 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
     allowSharedKeyAccess: false // Hardened: Disabling account key-based access
     networkAcls: {
       defaultAction: 'Deny'
+      ipRules: [
+        {
+          value: '173.245.48.0/20'
+        }
+        {
+          value: '103.21.244.0/22'
+        }
+        {
+          value: '103.22.200.0/22'
+        }
+        {
+          value: '103.31.4.0/22'
+        }
+        {
+          value: '141.101.64.0/18'
+        }
+        {
+          value: '108.162.192.0/18'
+        }
+        {
+          value: '190.93.240.0/20'
+        }
+        {
+          value: '188.114.96.0/20'
+        }
+        {
+          value: '197.234.240.0/22'
+        }
+        {
+          value: '198.41.128.0/17'
+        }
+        {
+          value: '162.158.0.0/15'
+        }
+        {
+          value: '104.16.0.0/13'
+        }
+        {
+          value: '104.24.0.0/14'
+        }
+        {
+          value: '172.64.0.0/13'
+        }
+        {
+          value: '131.0.72.0/22'
+        }
+      ]
+      bypass: 'AzureServices'
     }
   }
 }
