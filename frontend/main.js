@@ -26,7 +26,7 @@ const setCounterStatus = (message = '') => {
     if (!statusElement) {
         statusElement = document.createElement('span');
         statusElement.id = 'counter-status';
-        counterElement.insertAdjacentElement('afterend', statusElement);
+        counterElement.parentNode.insertBefore(statusElement, counterElement.nextSibling);
     }
 
     statusElement.textContent = message ? ` (${message})` : '';
