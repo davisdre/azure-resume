@@ -31,6 +31,9 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
     supportsHttpsTrafficOnly: true
     allowBlobPublicAccess: false // Hardened: Disabling public access (Resolves #23)
     allowSharedKeyAccess: false // Hardened: Disabling account key-based access
+    networkAcls: {
+      defaultAction: 'Deny'
+    }
   }
 }
 
