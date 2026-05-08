@@ -9118,6 +9118,9 @@ Detects the ability to request a specific amount of space for filesystem access
 */
 
   Modernizr.addTest('quotamanagement', function() {
+    if ('storage' in navigator && navigator.storage.estimate) {
+      return true;
+    }
     var tempStorage = prefixed('temporaryStorage', navigator);
     var persStorage = prefixed('persistentStorage', navigator);
 
