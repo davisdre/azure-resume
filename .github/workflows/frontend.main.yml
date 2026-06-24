@@ -75,6 +75,23 @@ jobs:
         echo "storageAccountName=$storageAccountName" >> $GITHUB_OUTPUT
         echo "functionAppUrl=$functionAppUrl" >> $GITHUB_OUTPUT
 
+    - name: 'Get GitHub runner public IP'
+      id: get-runner-ip
+      run: |
+        runner_ip=$(curl -sSL https://api.ipify.org || curl -sSL https://ifconfig.me)
+        if [ -z "$runner_ip" ]; then
+          echo "Failed to resolve the runner public IP address."
+          exit 1
+        fi
+        echo "runner_ip=$runner_ip" >> $GITHUB_OUTPUT
+
+    - name: 'Allow GitHub runner IP for storage upload'
+      run: |
+        az storage account network-rule add \
+          --resource-group "$AZURE_RESOURCE_GROUP" \
+          --account-name "${{ steps.get-outputs.outputs.storageAccountName }}" \
+          --ip-address "${{ steps.get-runner-ip.outputs.runner_ip }}"
+
     - name: 'Inject Function App URL into main.js'
       run: |
         sed -i "s|__FUNCTION_API_URL__|${{ steps.get-outputs.outputs.functionAppUrl }}|g" frontend/main.js
@@ -88,6 +105,16 @@ jobs:
       run: |
         az storage blob service-properties update --account-name ${{ steps.get-outputs.outputs.storageAccountName }} --auth-mode login --static-website --404-document index.html --index-document index.html
         az storage blob upload-batch --account-name ${{ steps.get-outputs.outputs.storageAccountName }} --auth-mode login -d '$web' -s frontend/ --overwrite
+
+    - name: 'Remove GitHub runner IP from storage firewall'
+      if: always()
+      run: |
+        if [ -n "${{ steps.get-runner-ip.outputs.runner_ip }}" ]; then
+          az storage account network-rule remove \
+            --resource-group "$AZURE_RESOURCE_GROUP" \
+            --account-name "${{ steps.get-outputs.outputs.storageAccountName }}" \
+            --ip-address "${{ steps.get-runner-ip.outputs.runner_ip }}"
+        fi
 
   # Azure logout
     - name: logout

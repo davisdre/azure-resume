@@ -33,6 +33,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
     allowSharedKeyAccess: false // Hardened: Disabling account key-based access
     networkAcls: {
       defaultAction: 'Deny'
+      bypass: 'AzureServices' // Allow trusted Azure services to access storage account when firewall rules are enabled
     }
   }
 }
