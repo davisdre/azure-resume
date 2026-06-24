@@ -1,0 +1,22 @@
+{
+  "features": {
+    "ghcr.io/azure/azure-dev/azd:0": {
+      "version": "0.2.0",
+      "resolved": "ghcr.io/azure/azure-dev/azd@sha256:01bbec064fcb34f7c8730b3e3c2cc210699e213419664524982268b2910c4f73",
+      "integrity": "sha256:01bbec064fcb34f7c8730b3e3c2cc210699e213419664524982268b2910c4f73"
+    },
+    "ghcr.io/devcontainers/features/dotnet": {
+      "version": "2.5.0",
+      "resolved": "ghcr.io/devcontainers/features/dotnet@sha256:0fc16547ed4db6d7ff2a9f5981d2b93eb314e568affb9958029ad794f1f9a093",
+      "integrity": "sha256:0fc16547ed4db6d7ff2a9f5981d2b93eb314e568affb9958029ad794f1f9a093"
+    },
+    "ghcr.io/dotnet/aspire-devcontainer-feature/dotnetaspire:1": {
+      "version": "1.0.0",
+      "resolved": "ghcr.io/dotnet/aspire-devcontainer-feature/dotnetaspire@sha256:21cf32b051d4afc63f3301ac2d1343394c6be53dbf370f9bf9e7b63c78aefd9b",
+      "integrity": "sha256:21cf32b051d4afc63f3301ac2d1343394c6be53dbf370f9bf9e7b63c78aefd9b",
+      "dependsOn": [
+        "ghcr.io/devcontainers/features/dotnet"
+      ]
+    }
+  }
+}
