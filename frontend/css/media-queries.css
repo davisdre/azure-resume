@@ -60,7 +60,12 @@
    /* Resume Section
    ------------------------------------------------------------------- */
    #resume h1 { font: 16px/24px 'opensans-bold', sans-serif; }
-   #resume .main-col { padding-right: 5%; }   
+   #resume .main-col { padding-right: 5%; }
+   #resume .main-col .item img.cert-badge {
+      max-width: 220px;
+      margin-left: auto;
+      margin-right: auto;
+   }
 
    /* Testimonials Section
    ------------------------------------------------------------------- */
@@ -365,6 +370,10 @@
 
    /* footer
    ------------------------------------------------------------------------ */
+
+   #resume .main-col .item img.cert-badge {
+      max-width: 150px;
+   }
 
    /* social links */
    footer .social-links { font-size: 20px; }
