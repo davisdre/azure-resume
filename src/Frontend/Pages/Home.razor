@@ -1,0 +1,64 @@
+@page "/"
+@inject HttpClient Http
+
+<PageTitle>Cloud Resume - Azure & .NET 10</PageTitle>
+
+<main class="resume-container">
+    <header>
+        <h1>John Doe</h1>
+        <p>Azure Cloud Administrator | enterprise governance & systems architecture</p>
+    </header>
+
+    <section>
+        <h2>Experience</h2>
+        <ul>
+            <li><strong>Cloud Systems Engineer</strong> - Managing enterprise-scale hybrid identity and infrastructure deployments.</li>
+            <li><strong>Systems Automation Specialist</strong> - Architecting zero-trust connectivity models and secure landing zones.</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p class="counter-text">
+            @if (visitorCount.HasValue)
+            {
+                <span>Total Page Visits: <strong>@visitorCount</strong></span>
+            }
+            else if (hasError)
+            {
+                <span>Metrics unavailable.</span>
+            }
+            else
+            {
+                <span>Loading traffic metrics...</span>
+            }
+        </p>
+    </footer>
+</main>
+
+@code {
+    private int? visitorCount;
+    private bool hasError = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // Replace with your real Azure Function endpoint
+            var result = await Http.GetFromJsonAsync<CounterMetric>("https://api.yourdomain.com/api/GetResumeCounter");
+            if (result != null)
+            {
+                visitorCount = result.Count;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"API Error: {ex.Message}");
+            hasError = true;
+        }
+    }
+
+    public class CounterMetric
+    {
+        public int Count { get; set; }
+    }
+}
