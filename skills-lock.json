@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "skills": {
+    "appinsights-instrumentation": {
+      "source": "microsoft/azure-skills",
+      "sourceType": "github",
+      "computedHash": "3ddf71098d9bd57c67b551fff1edbfe7a80ebebf0f47745e096cfae386639144"
+    },
+    "azure-cost": {
+      "source": "microsoft/azure-skills",
+      "sourceType": "github",
+      "computedHash": "03a286bc50aa249ee2f672266b017ba491e0189092ccbe8322eff1af809c12f2"
+    },
+    "azure-deploy": {
+      "source": "microsoft/azure-skills",
+      "sourceType": "github",
+      "computedHash": "24b86fa1efe41b29db90ce155bb490b74046996bc0c9b42a5e236f94a44a3090"
+    },
+    "azure-diagnostics": {
+      "source": "microsoft/azure-skills",
+      "sourceType": "github",
+      "computedHash": "ba77faad35ea56061e384faedda127645b70cce34381ceb2f131b072cba20aed"
+    },
+    "azure-enterprise-infra-planner": {
+      "source": "microsoft/azure-skills",
+      "sourceType": "github",
+      "computedHash": "4bac5160a9907907f47bcc14130d2751167d89201fa4f6765e0b021d38ca8db5"
+    },
+    "azure-prepare": {
+      "source": "microsoft/azure-skills",
+      "sourceType": "github",
+      "computedHash": "a02583c430d1f63e572d27fec1357e410d6fa5cb9bc15e840a004a7f33f842b3"
+    },
+    "azure-resource-lookup": {
+      "source": "microsoft/azure-skills",
+      "sourceType": "github",
+      "computedHash": "a21984ff37a5db387c8cb8b21dcf018538afb900143a0422fff096956036b122"
+    },
+    "azure-resource-visualizer": {
+      "source": "microsoft/azure-skills",
+      "sourceType": "github",
+      "computedHash": "ce4c09807008ecfc145c38ad10335c6bbbeff0fc8ad1cfb828e1cfec21ea1e01"
+    },
+    "azure-storage": {
+      "source": "microsoft/azure-skills",
+      "sourceType": "github",
+      "computedHash": "91c9e0459a74b405ee6181698ea085e5d04e683e2b6100d44630e90def608f1f"
+    },
+    "azure-validate": {
+      "source": "microsoft/azure-skills",
+      "sourceType": "github",
+      "computedHash": "d29b58b4e1a688810984ccf74376cbb3e959ca07acc08d5c69237d1effee2e62"
+    },
+    "gitea-workflow": {
+      "source": "jwynia/agent-skills",
+      "sourceType": "github",
+      "computedHash": "bc151a45fdc65bf0581688bcbd060caa24dcf6b046a6db1ed08131ee53954e96"
+    }
+  }
+}

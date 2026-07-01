@@ -151,6 +151,7 @@ body {
 
    -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
 	-webkit-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
 }
 
 /*  2. Typography
@@ -454,6 +455,13 @@ img {
 }
 img.pull-right { margin: 12px 0px 0px 18px; }
 img.pull-left { margin: 12px 18px 0px 0px; }
+img.cert-badge {
+   width: 100%;
+   max-width: 260px;
+   height: auto;
+   display: block;
+   margin: 15px 0 0;
+}
 
 /*  6. Buttons  --------------------------------------------------------- */
 
